@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const sendMail = require('../../config/email');
+const xmlToJson = require('../../util/xmlToJson');
 const xml2js = require('xml2js')
 
 class NewsController {
@@ -17,23 +18,8 @@ class NewsController {
 
     //[POST] create
     create(req, res) {
-        let data = req.body;
-
-        //check xml
-        if(req.headers['content-type'].includes("xml"))
-        {
-            //xml to json
-            const builder = new xml2js.Builder({
-                renderOpts: { 'pretty': false }
-            });
-            var parser = new xml2js.Parser({explicitArray : false});
-
-            parser.parseString(builder.buildObject(data), function (err, result) {
-                console.dir(JSON.stringify(result));
-                data = result.product;
-            })
-        }
-
+        const data = xmlToJson(req);
+        
         //create product
         const product = new Product(data);
         product.save().then(
@@ -48,22 +34,7 @@ class NewsController {
 
     //[PUT] update
     update(req, res, next) {
-        let data = req.body;
-        
-        //check xml
-        if(req.headers['content-type'].includes("xml"))
-        {
-            //xml to json
-            const builder = new xml2js.Builder({
-                renderOpts: { 'pretty': false }
-            });
-            var parser = new xml2js.Parser({explicitArray : false});
-
-            parser.parseString(builder.buildObject(data), function (err, result) {
-                console.dir(JSON.stringify(result));
-                data = result.product;
-            })
-        }
+        const data = xmlToJson(req);
         
         Product.updateOne({ _id: data._id }, data)
         .then(() => {
@@ -75,22 +46,7 @@ class NewsController {
 
     //[DELETE] delete
     delete(req, res, next) {
-        let data = req.body;
-        
-        //check xml
-        if(req.headers['content-type'].includes("xml"))
-        {
-            //xml to json
-            const builder = new xml2js.Builder({
-                renderOpts: { 'pretty': false }
-            });
-            var parser = new xml2js.Parser({explicitArray : false});
-
-            parser.parseString(builder.buildObject(data), function (err, result) {
-                console.dir(JSON.stringify(result));
-                data = result.product;
-            })
-        }
+        const data = xmlToJson(req);
 
         Product.deleteOne({ _id: data._id })
         .then( () => {

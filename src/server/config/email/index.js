@@ -1,14 +1,14 @@
 "use strict";
 const nodemailer = require("nodemailer");
 const receiver = "tuananhkgasd7@gmail.com";
-
+const sender = {username: "tuananhkgasd7@gmail.com", password: "qkwgwybwuptuulvf"};
 const sendEmail = async (data) => {
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'tuananhkgasd7@gmail.com',
-      pass: 'qkwgwybwuptuulvf',
+      user: sender.username,
+      pass: sender.password,
     },
   });
 
