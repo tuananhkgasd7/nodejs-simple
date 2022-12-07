@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 var bodyParser = require("body-parser");
-const { engine } = require('express-handlebars');
+require('body-parser-xml')(bodyParser);
 const db = require('./config/db');
 const path = require('path');
 const route = require('./routes');
@@ -12,15 +12,11 @@ const app = express();
 const port = 1234;
 
 app.use(bodyParser.json());
+// app.use(bodyParser.xml());
+app.use(bodyParser.xml());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
-app.engine('.hbs', engine({ 
-  extname: '.hbs',
-}));
-
-app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'views'));
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
