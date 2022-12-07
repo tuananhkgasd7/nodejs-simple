@@ -3,7 +3,6 @@ const morgan = require('morgan');
 var bodyParser = require("body-parser");
 require('body-parser-xml')(bodyParser);
 const db = require('./config/db');
-const path = require('path');
 const route = require('./routes');
 
 db.connect();
@@ -12,7 +11,6 @@ const app = express();
 const port = 1234;
 
 app.use(bodyParser.json());
-// app.use(bodyParser.xml());
 app.use(bodyParser.xml());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
