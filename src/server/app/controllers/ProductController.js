@@ -1,7 +1,6 @@
 const Product = require('../models/Product');
 const sendMail = require('../../config/email');
 const xmlToJson = require('../../util/xmlToJson');
-const xml2js = require('xml2js')
 
 class NewsController {
     //[GET] /
