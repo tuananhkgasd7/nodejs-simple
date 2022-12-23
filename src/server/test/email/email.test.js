@@ -21,8 +21,8 @@ describe('Test sql connection', () => {
         expect(email.bindDataTemplate(templatePath, {product: templateVar})).to.be.a('string');;
     });
 
-    it('Should send mail', async () => {
-        const nodemailer = require('nodemailer');
-        const stubNodemailer = sinon.stub(nodemailer, 'createTransport')
-    });
+    // it('Should send mail', async () => {
+    //     const nodemailer = require('nodemailer');
+    //     const stubNodemailer = sinon.stub(nodemailer, 'createTransport')
+    // });
 })
