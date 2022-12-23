@@ -1,0 +1,14 @@
+{
+    "Products": [
+        {
+            "_id": "0",
+            "name": "bike",
+            "price": 100
+        },
+        {
+            "_id": "1",
+            "name": "car",
+            "price": 2000
+        }
+    ]
+}
